@@ -3,6 +3,7 @@ package controller
 import (
 	"books/models"
 	"books/responses"
+	"encoding/json"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -32,7 +33,18 @@ func (app App) CreateBook(c *gin.Context) {
 		return
 	}
 
-	app.logging.Info().Msgf("[CREATE] success => %+v\n", inserted)
+	logInserted, err := json.Marshal(inserted)
+	if err != nil {
+		app.logging.Error().Msgf("[CREATE] failed => %+v\n", err.Error())
+		c.JSON(http.StatusInternalServerError, responses.ResponseSuccess{
+			Code:    http.StatusInternalServerError,
+			Success: false,
+			Message: err.Error(),
+		})
+		return
+	}
+
+	app.logging.Info().Msgf("[CREATE] success => %s", string(logInserted))
 
 	c.JSON(http.StatusOK, responses.ResponseSuccess{
 		Code:    http.StatusOK,
@@ -55,7 +67,18 @@ func (app App) ReadBooks(c *gin.Context) {
 		return
 	}
 
-	app.logging.Info().Msgf("[BOOKS] => %+v", books)
+	logBooks, err := json.Marshal(books)
+	if err != nil {
+		app.logging.Error().Msgf(err.Error())
+		c.JSON(http.StatusInternalServerError, responses.ResponseSuccess{
+			Code:    http.StatusInternalServerError,
+			Success: false,
+			Message: err.Error(),
+		})
+		return
+	}
+
+	app.logging.Info().Msgf("[BOOKS] => %s", string(logBooks))
 
 	c.JSON(http.StatusOK, responses.ResponseSuccess{
 		Code:    http.StatusOK,
