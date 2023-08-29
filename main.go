@@ -5,6 +5,7 @@ import (
 	"books/lib"
 	"fmt"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,11 +24,14 @@ func main() {
 	logging.Info().Msgf("[CONFIG] %v", config)
 	logging.Info().Msgf("[APP] Started at http://%s/", url)
 
-	gin.SetMode(gin.ReleaseMode)
 	route := gin.Default()
+	route.Use(cors.Default())
 
+	route.POST("/book/create", ctrl.CreateBook)
 	route.GET("/books", ctrl.ReadBooks)
-	route.POST("/books/create", ctrl.CreateBook)
+	route.GET("/book/:bookId", ctrl.ReadBook)
+	route.PUT("/book/update/:bookId", ctrl.UpdateBook)
+	route.DELETE("/book/delete/:bookId", ctrl.DeleteBook)
 
 	route.Run(url)
 }

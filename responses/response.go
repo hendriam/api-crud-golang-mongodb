@@ -4,7 +4,7 @@ import (
 	"books/models"
 )
 
-type ResponseSuccess struct {
+type Response struct {
 	Code    int         `json:"code"`
 	Success bool        `json:"success"`
 	Message string      `json:"message"`
@@ -18,8 +18,8 @@ type ResponseInsertSuccess struct {
 	Data    models.InsertOneResult
 }
 
-type ResponseFailed struct {
-	Code    int    `json:"code"`
-	Success bool   `json:"success"`
-	Message string `json:"message"`
-}
+// type ResponseFailed struct {
+// 	Code    int    `json:"code"`
+// 	Success bool   `json:"success"`
+// 	Message string `json:"message"`
+// }
