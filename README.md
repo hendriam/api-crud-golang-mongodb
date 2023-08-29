@@ -12,24 +12,24 @@ For http server I use [GIN](https://gin-gonic.com/)
 
 ```http
    
-# CREATE
+CREATE
 POST http://localhost:8080/book/create
 Content-Type: application/json
 
 REQUEST
 {
-    "ISBN": 9781841499789,
-    "title": "Bloodfire Quest",
-    "author": "Terry Brooks",
-    "summary": "The adventure that started in Wards of Faerie takes a thrilling new turn.",
-    "image_src": "http://s.s-bol.com/imgbase0/imagebase/large/FC/7/0/0/7/9200000009027007.jpg",
-    "price": {
-      "currency": "EUR",
-      "value": 24.5
-    }
+  "ISBN": 9781841499789,
+  "title": "Bloodfire Quest",
+  "author": "Terry Brooks",
+  "summary": "The adventure that started in Wards of Faerie takes a thrilling new turn.",
+  "image_src": "http://s.s-bol.com/imgbase0/imagebase/large/FC/7/0/0/7/9200000009027007.jpg",
+  "price": {
+    "currency": "EUR",
+    "value": 24.5
+  }
 }
 
-## RESPONSE
+RESPONSE
 {
 	"code": 200,
 	"success": true,
@@ -48,11 +48,11 @@ REQUEST
 	}
 }
 
-### READ
+READ
 GET http://localhost:8080/books
 Content-Type: application/json
 
-## RESPONSE
+RESPONSE
 {
 	"code": 200,
 	"success": true,
@@ -97,11 +97,11 @@ Content-Type: application/json
 	]
 }
 
-### READ ONE
+READ ONE
 GET http://localhost:8080/book/64ecde332b77172101c40dd3
 Content-Type: application/json
 
-## RESPONSE
+RESPONSE
 {
 	"code": 200,
 	"success": true,
@@ -120,11 +120,11 @@ Content-Type: application/json
 	}
 }
 
-### UPDATE
+UPDATE
 PUT http://localhost:8080/book/update/64eccc86cab5779bb6a6ea47
 Content-Type: application/json
 
-## REQUEST
+REQUEST
 {
 	"_id": "64eccc86cab5779bb6a6ea47",
 	"ISBN": 9781841499789,
@@ -138,7 +138,7 @@ Content-Type: application/json
     }
 }
 
-## RESPONSE
+RESPONSE
 {
 	"code": 200,
 	"success": true,
@@ -157,11 +157,11 @@ Content-Type: application/json
 	}
 }
 
-### DELETE
+DELETE
 DELETE http://localhost:8080/book/delete/64eccc55cab5779bb6a6ea46
 Content-Type: application/json
 
-## RESPONSE
+RESPONSE
 {
 	"code": 200,
 	"success": true,
